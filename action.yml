@@ -53,7 +53,22 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-
+  args:
+    - ${{ inputs.github_token }}
+    - ${{ inputs.reviewdog_level }}
+    - ${{ inputs.brakeman_input_flags }}
+    - ${{ inputs.brakeman_version }}
+    - ${{ inputs.rubocop_input_flags }}
+    - ${{ inputs.rubocop_version }}
+    - ${{ inputs.rubocop_rails_version }}
+    - ${{ inputs.rubocop_faker_version }}
+    - ${{ inputs.rubocop_performance_version }}
+    - ${{ inputs.eslint_input_flags }}
+    - ${{ inputs.eslint_version }}
+    - ${{ inputs.stylelint_input_flags }}
+    - ${{ inputs.stylelint_config }}
+    - ${{ inputs.stylelint_version }}
+    
 branding:
   icon: 'check'
   color: 'blue'
