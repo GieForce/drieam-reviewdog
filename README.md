@@ -1,25 +1,8 @@
-# action-template
+# drieam-reviewdog-action
 
-<!-- TODO: replace reviewdog/action-template with your repo name -->
-[![Test](https://github.com/reviewdog/action-template/workflows/Test/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3ATest)
-[![reviewdog](https://github.com/reviewdog/action-template/workflows/reviewdog/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3Areviewdog)
-[![depup](https://github.com/reviewdog/action-template/workflows/depup/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3Adepup)
-[![release](https://github.com/reviewdog/action-template/workflows/release/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3Arelease)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/reviewdog/action-template?logo=github&sort=semver)](https://github.com/reviewdog/action-template/releases)
-[![action-bumpr supported](https://img.shields.io/badge/bumpr-supported-ff69b4?logo=github&link=https://github.com/haya14busa/action-bumpr)](https://github.com/haya14busa/action-bumpr)
+This is a action repository for [reviewdog](https://github.com/reviewdog/reviewdog) actions with release automation.
 
-![github-pr-review demo](https://user-images.githubusercontent.com/3797062/73162963-4b8e2b00-4132-11ea-9a3f-f9c6f624c79f.png)
-![github-pr-check demo](https://user-images.githubusercontent.com/3797062/73163032-70829e00-4132-11ea-8481-f213a37db354.png)
-
-This is a template repository for [reviewdog](https://github.com/reviewdog/reviewdog) action with release automation.
-Click `Use this template` button to create your reviewdog action :dog:!
-
-If you want to create your own reviewdog action from scratch without using this
-template, please check and copy release automation flow.
-It's important to manage release workflow and sync reviewdog version for all
-reviewdog actions.
-
-This repo contains a sample action to run [misspell](https://github.com/client9/misspell).
+This repo contains all the actions which are required to run in Ruby on Rails.
 
 ## Input
 
@@ -29,67 +12,56 @@ inputs:
   github_token:
     description: 'GITHUB_TOKEN'
     default: '${{ github.token }}'
+    required: true
   ### Flags for reviewdog ###
-  level:
+  reviewdog_level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'error'
-  reporter:
-    description: 'Reporter of reviewdog command [github-pr-check,github-check,github-pr-review].'
-    default: 'github-pr-check'
-  ### Flags for <linter-name> ###
-  locale:
-    description: '-locale flag of misspell. (US/UK)'
+  ### Flags for brakeman ###
+  brakeman_input_flags:
+    description: 'brakeman flags. (brakeman --quiet --format tabs <brakeman_flags>)'
     default: ''
+  brakeman_version:
+    description: 'version to install'
+    default: '4.8.0'
+  ### Flags for rubocop ###
+  rubocop_input_flags:
+    description: 'rubocop flags. (rubocop <rubocop_flags>)'
+    default: ''
+  rubocop_version:
+    description: 'version to install'
+    default: '0.81.0'
+  rubocop_rails_version:
+    description: 'version to install'
+    default: '2.4.2'
+  rubocop_faker_version:
+    description: 'version to install'
+    default: '1.0.0'
+  rubocop_performance_version:
+    description: 'version to install'
+    default: '1.5.2'
+  ### Flags for eslint ### 
+  eslint_input_flags:
+    description: 'Input flags for eslint'
+    default: '.'
+  eslint_version: 
+    description: 'version to install'
+    default: '6.8.0'
+  ### Flags for stylelint ### 
+  stylelint_input_flags:
+    description: "Files or glob. Default: `**/*.css`.  It's same as `[input]` of stylelint."
+    default: 'app/javascript/**/*.scss'
+  stylelint_config:
+    description: "It's same as `--config` flag of stylelint."
+    default: 'stylelint.config.js'
+  stylelint_version:
+    description: 'version to install'
+    default: '13.3.0'
 ```
 
 ## Usage
 <!-- TODO: update. replace `template` with the linter name -->
-
-```yaml
-name: reviewdog
-on: [pull_request]
-jobs:
-  # TODO: change `linter_name`.
-  linter_name:
-    name: runner / <linter-name>
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: reviewdog/action-template@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          # Change reviewdog reporter if you need [github-pr-check,github-check,github-pr-review].
-          reporter: github-pr-review
-          # Change reporter level if you need.
-          # GitHub Status Check won't become failure with warning.
-          level: warning
-```
-
-## Development
-
-### Release
-
-#### [haya14busa/action-bumpr](https://github.com/haya14busa/action-bumpr)
-You can bump version on merging Pull Requests with specific labels (bump:major,bump:minor,bump:patch).
-Pushing tag manually by yourself also work.
-
-#### [haya14busa/action-update-semver](https://github.com/haya14busa/action-update-semver)
-
-This action updates major/minor release tags on a tag push. e.g. Update v1 and v1.2 tag when released v1.2.3.
-ref: https://help.github.com/en/articles/about-actions#versioning-your-action
-
-### Lint - reviewdog integration
-
-This reviewdog action template itself is integrated with reviewdog to run lints
-which is useful for Docker container based actions.
-
-![reviewdog integration](https://user-images.githubusercontent.com/3797062/72735107-7fbb9600-3bde-11ea-8087-12af76e7ee6f.png)
-
-Supported linters:
-
-- [reviewdog/action-shellcheck](https://github.com/reviewdog/action-shellcheck)
-- [reviewdog/action-hadolint](https://github.com/reviewdog/action-hadolint)
-- [reviewdog/action-misspell](https://github.com/reviewdog/action-misspell)
+TODO
 
 ### Dependencies Update Automation
 This repository uses [haya14busa/action-depup](https://github.com/haya14busa/action-depup) to update
