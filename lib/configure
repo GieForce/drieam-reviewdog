@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+config = YAML::load_file(File.join(__dir__, '.reviewdog.yml'))
+
+puts config
+
+keys = ENV.keys.select! { |key| key.end_with? "ENABLED" }
+keys.each do |key|
+
+    # Github prefixes every environment variable with INPUT so we need the second index
+    keyname = key.split('_')[1].downcase
+
+    if ENV[key].eql? 'false'
+        config['runner'].delete(keyname)
+    end
+end
+
+puts config
+
+File.open(File.join(__dir__, '.reviewdog.yml'), "w") do |file|
+    file.write config.to_yaml
+end

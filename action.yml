@@ -17,6 +17,9 @@ inputs:
   brakeman_version:
     description: 'version to install'
     default: '4.8.0'
+  brakeman_enabled:
+    description: 'Whether you want to execute this'
+    default: true
   ### Flags for rubocop ###
   rubocop_input_flags:
     description: 'rubocop flags. (rubocop <rubocop_flags>)'
@@ -33,6 +36,9 @@ inputs:
   rubocop_performance_version:
     description: 'version to install'
     default: '1.5.2'
+  rubocop_enabled:
+    description: 'Whether you want to execute this'
+    default: true
   ### Flags for eslint ### 
   eslint_input_flags:
     description: 'Input flags for eslint'
@@ -40,6 +46,9 @@ inputs:
   eslint_version: 
     description: 'version to install'
     default: '6.8.0'
+  eslint_enabled:
+    description: 'Whether you want to execute this'
+    default: false
   ### Flags for stylelint ### 
   stylelint_input_flags:
     description: "Files or glob. Default: `**/*.css`.  It's same as `[input]` of stylelint."
@@ -50,24 +59,12 @@ inputs:
   stylelint_version:
     description: 'version to install'
     default: '13.3.0'
+  stylelint_enabled:
+    description: 'Whether you want to execute this'
+    default: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.github_token }}
-    - ${{ inputs.reviewdog_level }}
-    - ${{ inputs.brakeman_input_flags }}
-    - ${{ inputs.brakeman_version }}
-    - ${{ inputs.rubocop_input_flags }}
-    - ${{ inputs.rubocop_version }}
-    - ${{ inputs.rubocop_rails_version }}
-    - ${{ inputs.rubocop_faker_version }}
-    - ${{ inputs.rubocop_performance_version }}
-    - ${{ inputs.eslint_input_flags }}
-    - ${{ inputs.eslint_version }}
-    - ${{ inputs.stylelint_input_flags }}
-    - ${{ inputs.stylelint_config }}
-    - ${{ inputs.stylelint_version }}
     
 branding:
   icon: 'check'

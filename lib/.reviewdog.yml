@@ -1,20 +1,18 @@
+---
 runner:
   brakeman:
     cmd: brakeman --quiet --format tabs "${BRAKEMAN_INPUT_FLAGS}"
     level: "${REVIEWDOG_LEVEL}"
     name: brakeman
-  
-  rubocop: 
+  rubocop:
     cmd: rubocop "${RUBOCOP_INPUT_FLAGS}"
     level: "${REVIEWDOG_LEVEL}"
     name: rubocop
-  
   eslint:
     cmd: $(yarn bin)/eslint -f="stylish" "${ESLINT_INPUT_FLAGS}"
     level: "${REVIEWDOG_LEVEL}"
     name: eslint
-
   stylelint:
     cmd: $(yarn bin)/stylelint "${STYLELINT_INPUT_FLAGS}" --config="${STYLELINT_CONFIG}"
     level: "${REVIEWDOG_LEVEL}"
-    name: stylelint 
+    name: stylelint
