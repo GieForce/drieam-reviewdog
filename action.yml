@@ -48,7 +48,7 @@ inputs:
     default: '6.8.0'
   eslint_enabled:
     description: 'Whether you want to execute this'
-    default: false
+    default: true
   ### Flags for stylelint ### 
   stylelint_input_flags:
     description: "Files or glob. Default: `**/*.css`.  It's same as `[input]` of stylelint."
