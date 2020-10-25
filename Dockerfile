@@ -1,6 +1,6 @@
 FROM timbru31/ruby-node:2.7
 
-ENV REVIEWDOG_VERSION=v0.10.1
+ENV REVIEWDOG_VERSION=v0.11.0
 
 SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
